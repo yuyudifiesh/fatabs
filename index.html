@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>起始页 | New Tab</title>
-    <!-- 引入 Font Awesome CDN (Cloudflare 提供) -->
+    <title>Tab | BETA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* 
-          利用 CSS 变量实现 Material Design 3 风格的深浅色自适应
-          浅色模式 (Light Mode) 默认配置
-        */
         :root {
-            --bg-color: #fbfeff;          /* 极轻微的蓝色调白色 */
-            --text-color: #191c1e;        /* 深灰黑色 */
-            --input-bg: #eff1f3;          /* 搜索框浅色背景 */
+            --bg-color: #fbfeff;
+            --text-color: #191c1e;
+            --input-bg: #eff1f3;
             --input-text: #191c1e;
-            --input-focus-border: #006493;/* MD3 经典的主调蓝色 */
+            --input-focus-border: #006493;
             --placeholder-color: #70787d;
             --transition-speed: 0.3s;
             --modal-bg: #ffffff;
@@ -24,14 +19,13 @@
             --border-color: #e1e2e5;
         }
 
-        /* 深色模式 (Dark Mode) 自动切换 */
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-color: #191c1e;      /* 暗黑背景 */
-                --text-color: #e2e2e5;    /* 柔和的白色 */
-                --input-bg: #2d3133;      /* 搜索框深色背景 */
+                --bg-color: #191c1e;
+                --text-color: #e2e2e5;
+                --input-bg: #2d3133;
                 --input-text: #e2e2e5;
-                --input-focus-border: #8fcdff; /* 深色模式下的亮蓝色 */
+                --input-focus-border: #8fcdff;
                 --placeholder-color: #8a9296;
                 --modal-bg: #2d3133;
                 --modal-overlay: rgba(0, 0, 0, 0.4);
@@ -39,7 +33,6 @@
             }
         }
 
-        /* 自定义像素字体 */
         @font-face {
             font-family: 'MinecraftFont';
             src: url('./source/minecraftfont.woff') format('woff');
@@ -48,7 +41,6 @@
             font-display: swap;
         }
 
-        /* 基础样式重置 */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -69,14 +61,12 @@
             overflow: hidden;
             padding: 20px;
 
-            /* 全局禁止选中和复制 */
             -webkit-user-select: none;  
             -moz-user-select: none;     
             -ms-user-select: none;      
             user-select: none;          
         }
 
-        /* 右上角设置按钮 */
         .settings-btn {
             position: absolute;
             top: 24px;
@@ -98,7 +88,6 @@
             transform: rotate(45deg);
         }
 
-        /* 主体布局包裹 */
         .container {
             display: flex;
             flex-direction: column;
@@ -114,7 +103,6 @@
             transition: transform var(--transition-speed) ease;
         }
 
-        /* 居中时间样式 */
         .time-display {
             font-size: 5.5rem;
             font-weight: 300;
@@ -125,7 +113,6 @@
             transition: font-size var(--transition-speed) ease;
         }
 
-        /* 时间后缀样式 (AM/PM) */
         .time-period {
             font-size: 1.8rem;
             margin-left: 12px;
@@ -133,7 +120,6 @@
             opacity: 0.8;
         }
 
-        /* 冒号闪烁动画定义 */
         @-webkit-keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.1; }
@@ -148,7 +134,6 @@
             animation: blink 1s infinite;
         }
 
-        /* 搜索框区域 */
         .search-wrapper {
             width: 100%;
             position: relative;
@@ -167,7 +152,6 @@
             -webkit-transition: all var(--transition-speed) cubic-bezier(0.2, 0, 0, 1);
             transition: all var(--transition-speed) cubic-bezier(0.2, 0, 0, 1);
 
-            /* 输入框默认字体降级，并允许正常复制和选中内容 */
             font-family: 'Google Sans', 'Product Sans', Arial, sans-serif;
             -webkit-user-select: text;
             -moz-user-select: text;
@@ -175,7 +159,6 @@
             user-select: text;
         }
 
-        /* 当开启功能时，切换为此像素字体样式 */
         .search-input.custom-font {
             font-family: 'MinecraftFont', sans-serif !important;
         }
@@ -195,7 +178,6 @@
             opacity: 0.8;
         }
 
-        /* Doodle 容器样式：【优化】默认隐藏 display: none */
         .doodle-container {
             display: none;             
             width: 100%;
@@ -205,17 +187,15 @@
             opacity: 0.95;
         }
 
-        /* Doodle 图片样式：【优化】修改为最大高度限制 280px，彻底禁止拖拽 */
         .doodle-img {
             max-height: 280px;         
             width: auto;
             height: auto;
             object-fit: contain;
-            pointer-events: none;      /* 阻止长按/拖拽事件 */
-            -webkit-user-drag: none;   /* 针对 WebKit 内核强制禁止拖拽 */
+            pointer-events: none;      
+            -webkit-user-drag: none;   
         }
 
-        /* 固定在底部的 Footer */
         footer {
             position: absolute;
             bottom: 24px;
@@ -229,9 +209,6 @@
             transition: color var(--transition-speed) ease, opacity var(--transition-speed) ease, visibility var(--transition-speed);
         }
 
-        /* ==========================================
-           弹窗样式 (Modal & Settings)
-           ========================================== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -305,7 +282,6 @@
             opacity: 1;
         }
 
-        /* 设置子项布局 */
         .setting-item {
             margin-bottom: 20px;
             display: flex;
@@ -340,7 +316,6 @@
             border-color: var(--input-focus-border);
         }
 
-        /* 优雅的仿 MD3 开关 (Switch) 样式 */
         .switch-label {
             display: flex;
             align-items: center;
@@ -385,9 +360,6 @@
             transform: translateX(20px);
         }
 
-        /* ==========================================
-           📱 移动端媒体查询适配
-           ========================================== */
         @media (max-width: 480px) {
             .container {
                 max-width: 88%;
@@ -423,7 +395,6 @@
                 font-size: 1.2rem;
             }
             
-            /* 移动端将 Doodle 图片的最大高度适当缩小，保证小屏紧凑 */
             .doodle-img {
                 max-height: 200px;
             }
@@ -432,14 +403,11 @@
 </head>
 <body>
 
-    <!-- 右上角设置按钮 -->
     <button class="settings-btn" id="openSettingsBtn" title="设置">
         <i class="fa-solid fa-gear"></i>
     </button>
 
-    <!-- 主体核心区域 -->
     <div class="container">
-        <!-- 居中时间 -->
         <div class="time-display">
             <span id="clockHours">00</span>
             <span class="colon" id="clockColon">:</span>
@@ -447,7 +415,6 @@
             <span class="time-period" id="timePeriod"></span>
         </div>
 
-        <!-- 居中圆角搜索框 -->
         <div class="search-wrapper">
             <form id="searchForm" action="https://cn.bing.com/search" method="get" target="_blank">
                 <input 
@@ -462,18 +429,15 @@
             </form>
         </div>
 
-        <!-- Doodle 容器（CSS 中默认设为了 display: none） -->
         <div class="doodle-container" id="doodleSlot">
             <img src="doodle/xiaoman.png" alt="小满 Doodle" class="doodle-img" draggable="false">
         </div>
     </div>
 
-    <!-- 固定底部的版权信息 -->
     <footer id="pageFooter">
         Copyright &copy; 2026 yuyudifiesh. All Rights Reserved.
     </footer>
 
-    <!-- 弹窗遮罩层及弹窗 -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-container">
             <div class="modal-header">
@@ -484,7 +448,6 @@
             </div>
             
             <div class="modal-body">
-                <!-- 设置项 1：搜索引擎选择 -->
                 <div class="setting-item">
                     <label class="setting-label" for="engineSelect">搜索引擎</label>
                     <select class="setting-select" id="engineSelect">
@@ -494,7 +457,6 @@
                     </select>
                 </div>
 
-                <!-- 【新增】设置项 2：Doodle 显示开关（默认不勾选） -->
                 <div class="setting-item" style="margin-top: 20px;">
                     <label class="switch-label">
                         <span class="setting-label">显示节日/节气 Doodle</span>
@@ -503,7 +465,6 @@
                     </label>
                 </div>
 
-                <!-- 设置项 3：时间制式转换 -->
                 <div class="setting-item" style="margin-top: 20px;">
                     <label class="switch-label">
                         <span class="setting-label">使用 24 小时制</span>
@@ -512,7 +473,6 @@
                     </label>
                 </div>
 
-                <!-- 设置项 4：时间分隔符闪烁 -->
                 <div class="setting-item" style="margin-top: 20px;">
                     <label class="switch-label">
                         <span class="setting-label">时间分隔符闪烁</span>
@@ -521,7 +481,6 @@
                     </label>
                 </div>
 
-                <!-- 设置项 5：搜索框字体选择 -->
                 <div class="setting-item" style="margin-top: 20px;">
                     <label class="switch-label">
                         <span class="setting-label">搜索框使用自定义像素字体</span>
@@ -530,7 +489,6 @@
                     </label>
                 </div>
 
-                <!-- 设置项 6：版权显示切换 -->
                 <div class="setting-item" style="margin-top: 20px;">
                     <label class="switch-label">
                         <span class="setting-label">显示页脚版权信息</span>
@@ -542,12 +500,9 @@
         </div>
     </div>
 
-    <!-- 核心逻辑 JavaScript 代码 -->
     <script>
-        // --- 全局配置变量 ---
         let is24Hour = true;
 
-        // --- 1. 时间时钟核心逻辑 ---
         function updateClock() {
             const now = new Date();
             let hours = now.getHours();
@@ -568,7 +523,6 @@
             document.getElementById('timePeriod').textContent = period;
         }
 
-        // --- 2. 弹窗显示/隐藏控制 ---
         const modalOverlay = document.getElementById('modalOverlay');
         const openSettingsBtn = document.getElementById('openSettingsBtn');
         const closeSettingsBtn = document.getElementById('closeSettingsBtn');
@@ -582,7 +536,6 @@
             if (e.target === modalOverlay) closeModal();
         });
 
-        // --- 3. 设置项联动交互逻辑 ---
         const footerToggle = document.getElementById('footerToggle');
         const pageFooter = document.getElementById('pageFooter');
         const engineSelect = document.getElementById('engineSelect');
@@ -592,11 +545,9 @@
         const clockColon = document.getElementById('clockColon');
         const timeFormatToggle = document.getElementById('timeFormatToggle');
         const fontToggle = document.getElementById('fontToggle');
-        // 【新增】获取 Doodle 相关的 DOM 节点
         const doodleToggle = document.getElementById('doodleToggle');
         const doodleSlot = document.getElementById('doodleSlot');
 
-        // 【新增】控制 Doodle 显示/隐藏
         doodleToggle.addEventListener('change', (e) => {
             if (e.target.checked) {
                 doodleSlot.style.display = "flex";
@@ -605,7 +556,6 @@
             }
         });
 
-        // A. 控制页脚版权显示/隐藏
         footerToggle.addEventListener('change', (e) => {
             if (e.target.checked) {
                 pageFooter.style.opacity = "0.6";
@@ -616,7 +566,6 @@
             }
         });
 
-        // B. 控制搜索引擎热切换
         const searchEngines = {
             bing: { action: "https://cn.bing.com/search", name: "q", placeholder: "使用 Bing 搜索..." },
             baidu: { action: "https://www.baidu.com/s", name: "wd", placeholder: "使用 百度 搜索..." },
@@ -632,7 +581,6 @@
             }
         });
 
-        // C. 控制时间分隔符闪烁
         blinkToggle.addEventListener('change', (e) => {
             if (e.target.checked) {
                 clockColon.classList.add('blinking');
@@ -641,13 +589,11 @@
             }
         });
 
-        // D. 控制 12/24 小时制制式转换
         timeFormatToggle.addEventListener('change', (e) => {
             is24Hour = e.target.checked;
             updateClock();
         });
 
-        // E. 控制搜索框像素字体激活状态
         fontToggle.addEventListener('change', (e) => {
             if (e.target.checked) {
                 searchInput.classList.add('custom-font');
@@ -656,7 +602,6 @@
             }
         });
 
-        // --- 4. 初始化启动 ---
         updateClock();
         setInterval(updateClock, 1000);
     </script>
