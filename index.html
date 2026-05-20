@@ -45,6 +45,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -60,7 +61,6 @@
             transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
             overflow: hidden;
             padding: 20px;
-
             -webkit-user-select: none;  
             -moz-user-select: none;     
             -ms-user-select: none;      
@@ -151,7 +151,6 @@
             outline: none;
             -webkit-transition: all var(--transition-speed) cubic-bezier(0.2, 0, 0, 1);
             transition: all var(--transition-speed) cubic-bezier(0.2, 0, 0, 1);
-
             font-family: 'Google Sans', 'Product Sans', Arial, sans-serif;
             -webkit-user-select: text;
             -moz-user-select: text;
@@ -222,10 +221,8 @@
             z-index: 100;
             opacity: 0;
             visibility: hidden;
-            
             -webkit-backdrop-filter: blur(4px);
             backdrop-filter: blur(4px);
-            
             -webkit-transition: opacity 0.25s ease, visibility 0.25s ease;
             transition: opacity 0.25s ease, visibility 0.25s ease;
         }
